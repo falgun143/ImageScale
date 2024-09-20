@@ -1,4 +1,4 @@
-const token = process.env.HUGGINGFACE_API_KEY
+const token = process.env.HUGGINGFACE_TOKEN
 
 export async function POST(request: Request) {
   try {
