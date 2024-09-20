@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Appbar from "./components/Appbar";
+import { Provider } from "./provider"; 
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,9 +28,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased  bg-gradient-to-r from-slate-900 to-purple-950 p-8 text-white `}
       >
+        <Provider>
+        <Appbar>
         {children}
+        </Appbar>
+        </Provider>
       </body>
     </html>
   );
