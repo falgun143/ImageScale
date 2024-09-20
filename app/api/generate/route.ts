@@ -6,7 +6,7 @@ export async function POST(request: Request) {
 
     // Send the request to Hugging Face API
     const response = await fetch(
-      "https://api-inference.huggingface.co/models/CompVis/stable-diffusion-v1-4",
+"https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0",
       {
         headers: {
           Authorization: `Bearer ${token}`,
