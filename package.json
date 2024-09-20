@@ -12,7 +12,9 @@
     "next": "14.2.12",
     "next-auth": "^4.24.7",
     "react": "^18",
-    "react-dom": "^18"
+    "react-css-spinners": "^4.0.2",
+    "react-dom": "^18",
+    "text_to_image": "file:"
   },
   "devDependencies": {
     "@types/node": "^20",
