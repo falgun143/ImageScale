@@ -31,9 +31,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased  bg-gradient-to-r from-slate-900 to-purple-950 p-8 text-white `}
       >
         <Provider>
-        <Appbar>
         {children}
-        </Appbar>
+   
         </Provider>
       </body>
     </html>
