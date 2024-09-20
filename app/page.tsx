@@ -47,19 +47,19 @@ export default function Home() {
   };
 
   return (
-    <div className=" w-full h-screen flex flex-col items-center    mt-20  gap-2 ">
-      <h1 className="text-3xl md:text-4xl lg:text-6xl  font-bold  tracking-tighter w-[40%] ">
+    <div className=" w-full h-screen flex flex-col items-center    mt-20  gap-4 ">
+      <h1 className="text-3xl md:text-4xl lg:text-6xl  font-bold  tracking-tighter   text-center  w-full md:w-[40%] ">
         Get Images on the go
       </h1>
 
       {session.data?.user ? (
-        <div className="w-full  h-auto flex flex-col items-center  justify-center gap-3 ">
+        <div className="w-full  h-auto flex flex-col items-center   gap-3 ">
           {/* Input for prompt */}
           <input
             type="text"
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
-            className=" p-4 rounded-xl bg-gray-700  w-3/4 "
+            className=" p-4 rounded-xl bg-gray-700  w-[95%] md:w-[60%] "
             placeholder="Enter a text prompt"
           />
           <button
@@ -104,7 +104,7 @@ export default function Home() {
           )}
         </div>
       ) : (
-        <p  className="text-xl  text-gray-500   w-[40%] ">
+        <p  className="text-xl  text-gray-500  w-[95%]  md:w-[45%] lg:[32%] ">
           Image Generator transforms your text prompts into high-quality images.
           Simply enter a description, and get instant, visually stunning results
           tailored to your input.
