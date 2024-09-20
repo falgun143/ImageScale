@@ -2,7 +2,7 @@ const token = process.env.HUGGINGFACE_TOKEN
 
 export async function POST(request: Request) {
   try {
-    const { prompt } = await request.json(); // Get prompt from request body
+    const { prompt } = await request.json(); // Getting prompt from the frontend
 
     // Send the request to Hugging Face API
     const response = await fetch(
@@ -13,11 +13,10 @@ export async function POST(request: Request) {
           "Content-Type": "application/json",
         },
         method: "POST",
-        body: JSON.stringify({ inputs: prompt }), // Use the prompt from the user
+        body: JSON.stringify({ inputs: prompt }),
       }
     );
 
-    // Check if the response is ok
     if (!response.ok) {
       return new Response(JSON.stringify({ error: "Failed to generate image" }), { status: 500 });
     }
@@ -28,7 +27,7 @@ export async function POST(request: Request) {
     // Return the image as the response
     return new Response(imageBlob, {
       headers: {
-        "Content-Type": "image/png", // Change this to the correct type if needed
+        "Content-Type": "image/png",
       },
     });
   } catch (error) {

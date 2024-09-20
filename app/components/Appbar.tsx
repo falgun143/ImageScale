@@ -18,7 +18,7 @@ const Appbar = ({ children }: { children: React.ReactNode }) => {
         <div className="font-bold  text-[18px] cursor-pointer    ">
           Image Generator
         </div>
-        {session.data?.user ? (
+        {!session.data?.user ? (
           <button
             onClick={() => signIn()}
             className="  transition ease-in-out delay-75  bg-purple-600  hover:bg-purple-800  rounded-md  flex justify-center items-center  w-[90px]  p-2 md:p-3   "

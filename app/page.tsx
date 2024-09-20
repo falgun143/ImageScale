@@ -1,5 +1,6 @@
 "use client";
 
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { Roller } from "react-css-spinners";
 
@@ -8,6 +9,7 @@ export default function Home() {
   const [imageSrc, setImageSrc] = useState<string | null>(null); // For displaying the generated image
   const [loading, setLoading] = useState(false); // Loading state
   const [error, setError] = useState(false);
+  const session = useSession();
 
   // Function to handle the image generation
   const generateImage = async () => {
@@ -45,65 +47,69 @@ export default function Home() {
   };
 
   return (
-    <div className=" w-full h-screen flex flex-col items-center   gap-10 ">
-      {/* Header */}
-
-      <h1 className="text-3xl md:text-4xl lg:text-6xl  font-bold  tracking-tighter ">
+    <div className=" w-full h-screen flex flex-col items-center    mt-20  gap-2 ">
+      <h1 className="text-3xl md:text-4xl lg:text-6xl  font-bold  tracking-tighter w-[40%] ">
         Get Images on the go
       </h1>
 
-      {/* Input for prompt */}
-      <input
-        type="text"
-        value={prompt}
-        onChange={(e) => setPrompt(e.target.value)}
-        className=" p-4 rounded-xl bg-gray-700  w-3/4 "
-        placeholder="Enter a text prompt"
-      />
-
-      {/* Button to trigger image generation */}
-      <div className="w-full  h-auto flex flex-col items-center  justify-center gap-3 ">
-        <button
-          onClick={generateImage}
-          className="   transition ease-in-out delay-75 p-2 md:p-3 rounded bg-purple-600 hover:bg-purple-800 text-[17px]  "
-        >
-          Generate Image
-        </button>
-        {/* Spinner */}
-        {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded  w-1/5  flex justify-between items-center ">
-            <div className="flex gap-1">
-              <strong className="font-bold">Oops!</strong>
-              <span className="block sm:inline">Prompt cannot be empty.</span>
-            </div>
-
-            <strong
-              className="text-3xl align-center cursor-pointer alert-del"
-              onClick={() => {
-                setError(false);
-              }}
-            >
-              &times;
-            </strong>
-          </div>
-        )}
-
-        {loading && (
-          <div className="flex gap-3">
-            <p>Analysing</p>
-            <Roller size={25} />
-          </div>
-        )}
-
-        {/* Displaying the generated image */}
-        {imageSrc && (
-          <img
-            src={imageSrc}
-            alt="Generated"
-            className="mt-4 w-[400px] h-[400px]  object-cover "
+      {session.data?.user ? (
+        <div className="w-full  h-auto flex flex-col items-center  justify-center gap-3 ">
+          {/* Input for prompt */}
+          <input
+            type="text"
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+            className=" p-4 rounded-xl bg-gray-700  w-3/4 "
+            placeholder="Enter a text prompt"
           />
-        )}
-      </div>
+          <button
+            onClick={generateImage}
+            className="   transition ease-in-out delay-75 p-2 md:p-3 rounded bg-purple-600 hover:bg-purple-800 text-[17px]  "
+          >
+            Generate Image
+          </button>
+          {/* Spinner */}
+          {error && (
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded  w-1/5  flex justify-between items-center ">
+              <div className="flex gap-1">
+                <strong className="font-bold">Oops!</strong>
+                <span className="block sm:inline">Prompt cannot be empty.</span>
+              </div>
+
+              <strong
+                className="text-3xl align-center cursor-pointer alert-del"
+                onClick={() => {
+                  setError(false);
+                }}
+              >
+                &times;
+              </strong>
+            </div>
+          )}
+
+          {loading && (
+            <div className="flex gap-3">
+              <p>Analysing</p>
+              <Roller size={25} />
+            </div>
+          )}
+
+          {/* Displaying the generated image */}
+          {imageSrc && (
+            <img
+              src={imageSrc}
+              alt="Generated"
+              className="mt-4 w-[400px] h-[400px]  object-cover "
+            />
+          )}
+        </div>
+      ) : (
+        <p  className="text-xl  text-gray-500   w-[40%] ">
+          Image Generator transforms your text prompts into high-quality images.
+          Simply enter a description, and get instant, visually stunning results
+          tailored to your input.
+        </p>
+      )}
     </div>
   );
 }
